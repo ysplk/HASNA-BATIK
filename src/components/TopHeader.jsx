@@ -8,7 +8,7 @@ export default function TopHeader({
 }) {
   return (
     <header className="flex items-center justify-between py-5 px-4 sm:px-8 bg-transparent">
-      {/* Mobile Menu Button */}
+      {/* Mobile Menu Button & Brand */}
       <div className="flex items-center gap-3 lg:hidden">
         <button
           onClick={onToggleMobileMenu}
@@ -17,9 +17,19 @@ export default function TopHeader({
         >
           <Menu className="w-5 h-5" />
         </button>
-        <span className="font-serif font-bold text-lg text-[#1F1A17] tracking-wider">
-          LUMINA
-        </span>
+        
+        {/* Mobile Brand with Logo */}
+        <div className="flex items-center gap-2">
+          <div className="w-7 h-7 rounded-lg bg-[#1F1A17] p-1 flex items-center justify-center">
+            <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 text-[#C5A059]">
+              <path d="M12 2.5C9.5 6 6 9.5 2.5 12 6 14.5 9.5 18 12 21.5 14.5 18 18 14.5 21.5 12 18 9.5 14.5 6 12 2.5Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+              <circle cx="12" cy="12" r="2" fill="currentColor" />
+            </svg>
+          </div>
+          <span className="font-serif font-bold text-base text-[#1F1A17] tracking-wider">
+            HASTNA BATIK
+          </span>
+        </div>
       </div>
 
       <div className="hidden lg:block">

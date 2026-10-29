@@ -11,7 +11,7 @@ export default function App() {
   // 1. Batik Catalog State with LocalStorage
   const [batikList] = useState(() => {
     try {
-      const saved = localStorage.getItem('lumina_batik_list');
+      const saved = localStorage.getItem('hastna_batik_list') || localStorage.getItem('lumina_batik_list');
       return saved ? JSON.parse(saved) : initialBatikList;
     } catch {
       return initialBatikList;
@@ -21,7 +21,7 @@ export default function App() {
   // 2. Shopping Cart State with LocalStorage
   const [cart, setCart] = useState(() => {
     try {
-      const saved = localStorage.getItem('lumina_cart');
+      const saved = localStorage.getItem('hastna_cart') || localStorage.getItem('lumina_cart');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -38,7 +38,7 @@ export default function App() {
   // Sync cart to LocalStorage
   useEffect(() => {
     try {
-      localStorage.setItem('lumina_cart', JSON.stringify(cart));
+      localStorage.setItem('hastna_cart', JSON.stringify(cart));
     } catch (err) {
       console.error("Gagal menyimpan keranjang ke localStorage", err);
     }

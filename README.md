@@ -1,4 +1,4 @@
-# 🌟 LUMINA — Batik & Craft Gallery
+# 🌟 HASTNA BATIK — Batik & Craft Gallery
 
 > **Project Ujian Tengah Semester (UTS)**  
 > **Mata Kuliah:** Pemrograman Web 4  
@@ -8,54 +8,34 @@
 ---
 
 ## 📖 Tentang Aplikasi
-**LUMINA** adalah aplikasi katalog dan galeri digital batik modern Indonesia dengan desain elegan, minimalis, dan berkelas (*warm off-white, soft tan, dan typography serif Playfair Display*). Aplikasi ini dilengkapi dengan operasi **CRUD lengkap** serta keranjang belanja koleksi (*Shopping Cart*).
+**HASTNA BATIK** adalah aplikasi galeri dan katalog digital batik modern Indonesia dengan desain elegan, minimalis, dan berkelas (*warm off-white, soft tan, dan typography serif Playfair Display*). Aplikasi ini dilengkapi dengan logo khas batik nusantara, kategorisasi motif, pencarian interaktif, dan keranjang belanja koleksi (*Shopping Cart*).
 
 ---
 
-## ✨ Fitur-Fitur Utama (Sesuai Kriteria Penilaian UTS)
+## ✨ Fitur-Fitur Utama
 
-1. **🎨 Desain & Layout Eksklusif (Sesuai Mockup Desain)**
+1. **🎨 Desain & Identitas Brand (HASTNA BATIK)**
+   - **Logo Batik:** Lambang geometris khas ornamen Kawung & bunga teratai nusantara berpadu gradasi emas-perunggu di bagian atas judul brand.
    - **Sidebar Navigasi Kiri:**
-     - Logo *LUMINA - Batik & Craft Gallery*.
-     - Kategori motif (*Semua, Kain Tradisional, Kemeja Pria, Gaun & Outer, Aksesoris*) dengan indikator aktif (*dot accent*).
+     - Logo & Brand: *HASTNA BATIK - Batik & Craft Gallery*.
+     - Kategori motif (*Semua, Kain Tradisional, Kemeja Pria, Gaun & Outer, Aksesoris*) dengan indikator titik aktif (*dot accent*).
      - Kartu catatan budaya di bagian bawah sidebar.
    - **Hero Card Elegan:**
-     - Badge *Warisan Budaya Nusantara*, headline *Mahakarya Batik Indonesia*, dan kolom pencarian terintegrasi.
+     - Tag *WARISAN BUDAYA NUSANTARA*, headline *Mahakarya Batik Indonesia*, dan kolom pencarian terintegrasi.
    - **Kartu Produk Estetik:**
      - Badge asal daerah (e.g. `PEKALONGAN, JAWA TENGAH`, `CIREBON, JAWA BARAT`, `SOLO, JAWA TENGAH`, `YOGYAKARTA`).
-     - Judul serif, cuplikan filosofi motif, harga format Rupiah, dan tautan *Lihat Detail →*.
-
-2. **⚡ Operasi CRUD Penuh (Create, Read, Update, Delete)**
-   - **Create (Tambah):** Tambah motif/produk batik baru dengan form modal lengkap (Nama, Kategori, Daerah, Harga, Filosofi, Deskripsi, Teknik Pembuatan, Bahan Kain, serta Upload Gambar/URL).
-   - **Read (Tampil & Detail):**
-     - Filter berdasarkan kategori motif.
-     - Pencarian real-time (nama motif, daerah, filosofi).
-     - Halaman detail komprehensif menampilkan foto resolusi tinggi, filosofi mendalam, spesifikasi teknik, dan bahan kain.
-   - **Update (Edit):** Edit data motif batik yang sudah ada langsung dari kartu maupun dari halaman detail.
-   - **Delete (Hapus):** Hapus motif batik dari katalog dengan dialog konfirmasi aman.
-   - **Penyimpanan Persisten:** Semua data otomatis tersimpan di `localStorage` peramban web.
-
-3. **🛍️ Keranjang Koleksi (Shopping Cart)**
-   - Tombol *Keranjang (N)* di bagian atas kanan.
-   - Tambah produk ke keranjang dari halaman detail.
-   - Halaman keranjang dengan tampilan kosong (*empty state* estetik) dan daftar belanjaan dengan pengatur jumlah (*+ / -*), hapus item, dan ringkasan tagihan pesanan.
-
----
-
-## 🛠️ Tech Stack
-
-- **Framework:** React 18 + Vite
-- **Styling:** Tailwind CSS (Custom palette: `lumina-bg`, `lumina-hero`, `lumina-card`, `lumina-accent`)
-- **Typography:** Playfair Display & Plus Jakarta Sans (Google Fonts)
-- **Icons:** Lucide React
-- **Storage:** Web Browser LocalStorage
+     - Judul serif, filosofi motif, harga format Rupiah, dan tautan *Lihat Detail →*.
+   - **Halaman Detail Produk:**
+     - Foto resolusi tinggi, filosofi mendalam, spesifikasi teknik pembuatan, bahan kain, dan tombol *TAMBAH KE KERANJANG*.
+   - **Keranjang Koleksi (Shopping Cart):**
+     - Keranjang dinamis dengan pengatur jumlah (+ / -), hapus item, dan ringkasan pembayaran.
 
 ---
 
 ## 🚀 Cara Menjalankan Project
 
 ```bash
-# 1. Jalankan development server
+# Jalankan development server
 npm run dev
 ```
 
