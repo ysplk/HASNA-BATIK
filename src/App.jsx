@@ -5,12 +5,11 @@ import HeroSection from './components/HeroSection';
 import BatikCard from './components/BatikCard';
 import DetailView from './components/DetailView';
 import CartView from './components/CartView';
-import CrudModal from './components/CrudModal';
 import { initialBatikList } from './data/batikData';
 
 export default function App() {
   // 1. Batik Catalog State with LocalStorage
-  const [batikList, setBatikList] = useState(() => {
+  const [batikList] = useState(() => {
     try {
       const saved = localStorage.getItem('lumina_batik_list');
       return saved ? JSON.parse(saved) : initialBatikList;
@@ -36,19 +35,7 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // 4. CRUD Modal State
-  const [isCrudModalOpen, setIsCrudModalOpen] = useState(false);
-  const [editingBatik, setEditingBatik] = useState(null);
-
-  // Save to LocalStorage on changes
-  useEffect(() => {
-    try {
-      localStorage.setItem('lumina_batik_list', JSON.stringify(batikList));
-    } catch (err) {
-      console.error("Gagal menyimpan katalog ke localStorage", err);
-    }
-  }, [batikList]);
-
+  // Sync cart to LocalStorage
   useEffect(() => {
     try {
       localStorage.setItem('lumina_cart', JSON.stringify(cart));
@@ -89,46 +76,6 @@ export default function App() {
   const totalCartCount = useMemo(() => {
     return cart.reduce((acc, item) => acc + item.quantity, 0);
   }, [cart]);
-
-  // CRUD Operations: Create & Update
-  const handleOpenAddModal = () => {
-    setEditingBatik(null);
-    setIsCrudModalOpen(true);
-  };
-
-  const handleOpenEditModal = (batik) => {
-    setEditingBatik(batik);
-    setIsCrudModalOpen(true);
-  };
-
-  const handleSaveBatik = (savedItem) => {
-    if (editingBatik) {
-      // Update existing
-      setBatikList(prev => prev.map(item => item.id === savedItem.id ? savedItem : item));
-      if (selectedBatik && selectedBatik.id === savedItem.id) {
-        setSelectedBatik(savedItem);
-      }
-    } else {
-      // Create new
-      setBatikList(prev => [savedItem, ...prev]);
-    }
-    setIsCrudModalOpen(false);
-    setEditingBatik(null);
-  };
-
-  // CRUD Operation: Delete
-  const handleDeleteBatik = (id) => {
-    const itemToDelete = batikList.find(b => b.id === id);
-    const confirmDelete = window.confirm(`Apakah Anda yakin ingin menghapus "${itemToDelete?.name || 'motif ini'}" dari katalog?`);
-    if (confirmDelete) {
-      setBatikList(prev => prev.filter(item => item.id !== id));
-      // If we are currently viewing this item in detail view, return to catalog
-      if (selectedBatik && selectedBatik.id === id) {
-        setSelectedBatik(null);
-        setCurrentView('catalog');
-      }
-    }
-  };
 
   // View navigation handlers
   const handleSelectBatik = (batik) => {
@@ -179,7 +126,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-stone-800 flex">
       
-      {/* 1. Left Sidebar Navigation (Matches Lumina Layout) */}
+      {/* 1. Left Sidebar Navigation */}
       <Sidebar
         selectedCategory={selectedCategory}
         onSelectCategory={(cat) => {
@@ -199,7 +146,6 @@ export default function App() {
         <TopHeader
           cartCount={totalCartCount}
           onOpenCart={handleOpenCart}
-          onOpenAddModal={handleOpenAddModal}
           onToggleMobileMenu={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         />
 
@@ -223,8 +169,6 @@ export default function App() {
                       key={batik.id}
                       batik={batik}
                       onSelect={handleSelectBatik}
-                      onEdit={handleOpenEditModal}
-                      onDelete={handleDeleteBatik}
                     />
                   ))}
                 </div>
@@ -248,18 +192,16 @@ export default function App() {
             </div>
           )}
 
-          {/* VIEW: DETAIL (Image 5) */}
+          {/* VIEW: DETAIL */}
           {currentView === 'detail' && selectedBatik && (
             <DetailView
               batik={selectedBatik}
               onBack={handleBackToCatalog}
               onAddToCart={handleAddToCart}
-              onEdit={handleOpenEditModal}
-              onDelete={handleDeleteBatik}
             />
           )}
 
-          {/* VIEW: CART (Image 4) */}
+          {/* VIEW: CART */}
           {currentView === 'cart' && (
             <CartView
               cartItems={cart}
@@ -272,17 +214,6 @@ export default function App() {
 
         </main>
       </div>
-
-      {/* CRUD Modal (Create & Update) */}
-      <CrudModal
-        isOpen={isCrudModalOpen}
-        onClose={() => {
-          setIsCrudModalOpen(false);
-          setEditingBatik(null);
-        }}
-        onSave={handleSaveBatik}
-        initialData={editingBatik}
-      />
 
     </div>
   );

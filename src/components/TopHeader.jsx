@@ -1,10 +1,9 @@
 import React from 'react';
-import { ShoppingBag, Plus, Menu } from 'lucide-react';
+import { ShoppingBag, Menu } from 'lucide-react';
 
 export default function TopHeader({ 
   cartCount, 
   onOpenCart, 
-  onOpenAddModal, 
   onToggleMobileMenu 
 }) {
   return (
@@ -27,19 +26,8 @@ export default function TopHeader({
         {/* Spacer for desktop layout */}
       </div>
 
-      {/* Right Action Buttons */}
-      <div className="flex items-center gap-3 ml-auto">
-        {/* CRUD Add Button */}
-        <button
-          onClick={onOpenAddModal}
-          className="bg-white border border-[#E8E4DC] hover:border-[#8C7355] hover:bg-[#FAF8F5] text-stone-800 text-xs font-semibold px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-xs transition-all active:scale-95"
-          title="Tambah Koleksi Batik Baru (CRUD)"
-        >
-          <Plus className="w-3.5 h-3.5 text-[#8C7355]" />
-          <span>Tambah Batik</span>
-        </button>
-
-        {/* Cart Button */}
+      {/* Right Action Button (Keranjang) */}
+      <div className="flex items-center ml-auto">
         <button
           onClick={onOpenCart}
           className="bg-white border border-[#E8E4DC] hover:border-stone-400 text-stone-800 text-xs font-semibold px-4 py-2 rounded-xl flex items-center gap-2 shadow-xs transition-all active:scale-95 group"

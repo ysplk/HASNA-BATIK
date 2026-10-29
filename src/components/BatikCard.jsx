@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { ArrowRight, Edit3, Trash2 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { formatRupiah } from '../data/batikData';
 
 export default function BatikCard({ 
   batik, 
-  onSelect, 
-  onEdit, 
-  onDelete 
+  onSelect 
 }) {
   const [imgError, setImgError] = useState(false);
   const fallbackImage = "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=800&auto=format&fit=crop";
@@ -30,27 +28,6 @@ export default function BatikCard({
         {/* Region Badge (Top Left) */}
         <div className="absolute top-3 left-3 bg-[#1F1A17] text-white text-[9px] sm:text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full shadow-xs">
           {batik.region}
-        </div>
-
-        {/* Quick Admin Actions (Edit & Delete CRUD) */}
-        <div 
-          onClick={(e) => e.stopPropagation()} 
-          className="absolute top-3 right-3 flex items-center gap-1.5 opacity-90 sm:opacity-0 group-hover:opacity-100 transition-opacity"
-        >
-          <button
-            onClick={() => onEdit(batik)}
-            title="Edit Motif (CRUD)"
-            className="p-1.5 rounded-full bg-white/95 text-stone-700 hover:text-[#8C7355] hover:bg-white shadow-sm transition-all"
-          >
-            <Edit3 className="w-3.5 h-3.5" />
-          </button>
-          <button
-            onClick={() => onDelete(batik.id)}
-            title="Hapus Motif (CRUD)"
-            className="p-1.5 rounded-full bg-white/95 text-stone-700 hover:text-red-600 hover:bg-white shadow-sm transition-all"
-          >
-            <Trash2 className="w-3.5 h-3.5" />
-          </button>
         </div>
       </div>
 

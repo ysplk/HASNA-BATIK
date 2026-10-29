@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Sparkles, ShoppingBag, Edit3, Trash2, Check } from 'lucide-react';
+import { ArrowLeft, Sparkles, ShoppingBag, Check } from 'lucide-react';
 import { formatRupiah } from '../data/batikData';
 
 export default function DetailView({ 
   batik, 
   onBack, 
-  onAddToCart, 
-  onEdit, 
-  onDelete 
+  onAddToCart 
 }) {
   const [added, setAdded] = useState(false);
   const [imgError, setImgError] = useState(false);
@@ -92,8 +90,8 @@ export default function DetailView({
             </div>
           </div>
 
-          {/* Action Button & Admin Controls */}
-          <div className="space-y-3 pt-4 border-t border-stone-100">
+          {/* Action Button: TAMBAH KE KERANJANG */}
+          <div className="pt-4 border-t border-stone-100">
             <button
               onClick={handleAddToCart}
               className={`w-full py-4 rounded-xl font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 shadow-xs transition-all active:scale-[0.99] ${
@@ -114,26 +112,6 @@ export default function DetailView({
                 </>
               )}
             </button>
-
-            {/* Admin CRUD Actions (Edit & Delete) */}
-            <div className="flex items-center gap-2 pt-2">
-              <button
-                onClick={() => onEdit(batik)}
-                className="flex-1 py-2.5 px-3 border border-stone-200 hover:border-[#8C7355] hover:bg-stone-50 text-stone-700 text-xs font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-colors"
-              >
-                <Edit3 className="w-3.5 h-3.5 text-[#8C7355]" />
-                <span>Edit Motif (CRUD)</span>
-              </button>
-
-              <button
-                onClick={() => onDelete(batik.id)}
-                className="py-2.5 px-3 border border-stone-200 hover:border-red-300 hover:bg-red-50 text-stone-600 hover:text-red-700 text-xs font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-colors"
-                title="Hapus Motif"
-              >
-                <Trash2 className="w-3.5 h-3.5" />
-                <span>Hapus</span>
-              </button>
-            </div>
           </div>
 
         </div>
