@@ -1,0 +1,251 @@
+export const initialBatikList = [
+  {
+    id: 1,
+    name: "Batik Mega Mendung",
+    origin: "Cirebon, Jawa Barat",
+    region: "Jawa Barat",
+    category: "Spiritual & Ketenangan",
+    technique: "Batik Tulis & Cap",
+    era: "Abad ke-16 (Pengaruh Akulturasi Tiongkok & Sunan Gunung Jati)",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Mega_Mendung_Batik.jpg/800px-Mega_Mendung_Batik.jpg",
+    tags: ["Awan", "Pesisir", "Akulturasi", "Gradasi 7 Warna"],
+    description: "Motif berbentuk awan bergulung dengan gradasi warna khas (biasanya merah dan biru) yang melambangkan dunia atas dan luasnya cakrawala.",
+    philosophy: "Mega mendung bermakna awan mendung pembawa hujan yang menyejukkan bumi dan membawa kesuburan. Garis berlapis melambangkan seseorang harus mampu mendinginkan emosi, bersabar, dan berpikiran jernih saat menghadapi cobaan hidup.",
+    usage: "Upacara adat keraton Kasepuhan Cirebon, busana formal, hingga fashion kontemporer modern.",
+    dominantColor: "Biru Laut & Merah Marun",
+    featured: true
+  },
+  {
+    id: 2,
+    name: "Batik Parang Rusak Barong",
+    origin: "Yogyakarta & Surakarta",
+    region: "DI Yogyakarta",
+    category: "Keberanian & Kepemimpinan",
+    technique: "Batik Tulis Halus",
+    era: "Zaman Kerajaan Mataram Islam (Sultan Agung)",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/COLLECTIE_TROPENMUSEUM_Katoenen_doek_met_batikpatroon_zogenaamd_parang_rusak_barong_TMnr_60052737.jpg/800px-COLLECTIE_TROPENMUSEUM_Katoenen_doek_met_batikpatroon_zogenaamd_parang_rusak_barong_TMnr_60052737.jpg",
+    tags: ["Keraton", "Ombak Karang", "Ksatria", "Batik Larangan"],
+    description: "Salah satu motif batik tertua di tanah Jawa. Terinspirasi dari deburan ombak laut selatan yang tiada henti menghantam tebing karang terjal.",
+    philosophy: "Bermakna semangat juang ksatria yang pantang menyerah dalam menaklukkan nafsu pribadi dan rintangan hidup. Dahulu merupakan batik larangan (awisan dalem) yang hanya boleh dikenakan raja dan keturunannya.",
+    usage: "Upacara sakral keraton, penobatan raja, dan acara adat Jawa berwibawa.",
+    dominantColor: "Cokelat Sogan, Hitam & Putih",
+    featured: true
+  },
+  {
+    id: 3,
+    name: "Batik Kawung",
+    origin: "Yogyakarta & Jawa Tengah",
+    region: "DI Yogyakarta",
+    category: "Kesucian & Keadilan",
+    technique: "Batik Tulis & Cap",
+    era: "Abad ke-13 (Kerajaan Kediri & Mataram)",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/COLLECTIE_TROPENMUSEUM_Katoenen_doek_met_batikpatroon_zogenaamd_kawung_TMnr_60052739.jpg/800px-COLLECTIE_TROPENMUSEUM_Katoenen_doek_met_batikpatroon_zogenaamd_kawung_TMnr_60052739.jpg",
+    tags: ["Geometris", "Buah Kolang-Kaling", "Empat Penjuru", "Kesederhanaan"],
+    description: "Motif geometris empat bulatan elips yang tersusun simetris menyerupai buah kolang-kaling (pohon aren) dengan titik pusat di tengahnya.",
+    philosophy: "Melambangkan konsep 'Sedulur Papat Limo Pancer' (empat penjuru mata angin berpusat pada hati nurani manusia). Mengajarkan kesucian hati, ketulusan, pengendalian diri, dan keadilan dalam memimpin.",
+    usage: "Dikenakan oleh para tetua, bangsawan, serta busana resmi sehari-hari.",
+    dominantColor: "Sogan Klasik & Krem",
+    featured: true
+  },
+  {
+    id: 4,
+    name: "Batik Truntum",
+    origin: "Surakarta (Solo), Jawa Tengah",
+    region: "Jawa Tengah",
+    category: "Cinta & Kesetiaan",
+    technique: "Batik Tulis Canting",
+    era: "Abad ke-18 (Kanjeng Ratu Kencana)",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/COLLECTIE_TROPENMUSEUM_Batikpatroon_truntum_TMnr_5941-47.jpg/800px-COLLECTIE_TROPENMUSEUM_Batikpatroon_truntum_TMnr_5941-47.jpg",
+    tags: ["Bintang Malam", "Pernikahan", "Kasih Sayang", "Sakral"],
+    description: "Motif bertabur kuntum bunga melati atau bintang kecil di langit malam yang gelap gulita, diciptakan oleh ratu yang merindukan kembali cinta sang raja.",
+    philosophy: "Kata 'truntum' berasal dari 'tumaruntum' yang bermakna bersemi atau tumbuh kembali. Melambangkan cinta kasih yang tulus, abadi, dan selalu bertumbuh tanpa syarat di antara pasangan.",
+    usage: "Wajib dikenakan oleh orang tua pengantin saat prosesi pernikahan adat Jawa (panggih).",
+    dominantColor: "Dasar Hitam dengan Titik Emas/Cokelat",
+    featured: true
+  },
+  {
+    id: 5,
+    name: "Batik Sekar Jagad",
+    origin: "Yogyakarta & Surakarta",
+    region: "DI Yogyakarta",
+    category: "Keberagaman & Keindahan",
+    technique: "Batik Tulis Kombinasi",
+    era: "Abad ke-18",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/COLLECTIE_TROPENMUSEUM_Kain_pandjang_met_een_patroon_van_bloemen_in_ruiten_TMnr_4162-8.jpg/800px-COLLECTIE_TROPENMUSEUM_Kain_pandjang_met_een_patroon_van_bloemen_in_ruiten_TMnr_4162-8.jpg",
+    tags: ["Peta Dunia", "Bunga Jagad", "Pesona Nusantara", "Harmoni"],
+    description: "Tersusun dari berbagai pulau-pulau motif yang berbeda di setiap lekukannya, menyerupai peta keindahan alam semesta.",
+    philosophy: "'Sekar' berarti bunga dan 'Jagad' berarti dunia. Menggambarkan pesona keanekaragaman suku bangsa dan budaya nusantara yang terjalin dalam satu harmoni yang mempesona.",
+    usage: "Acara perayaan kebudayaan, hajatan keluarga, dan pesta kenegaraan.",
+    dominantColor: "Multiwarna Bernuansa Bumi (Earthy Tones)",
+    featured: false
+  },
+  {
+    id: 6,
+    name: "Batik Sidomukti",
+    origin: "Surakarta & Magetan",
+    region: "Jawa Tengah",
+    category: "Kemakmuran & Masa Depan",
+    technique: "Batik Tulis Sogan Alami",
+    era: "Zaman Keraton Surakarta",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/COLLECTIE_TROPENMUSEUM_Katoenen_doek_met_batikpatroon_zogenaamd_sido_mukti_TMnr_60052738.jpg/800px-COLLECTIE_TROPENMUSEUM_Katoenen_doek_met_batikpatroon_zogenaamd_sido_mukti_TMnr_60052738.jpg",
+    tags: ["Pengantin", "Kebahagiaan", "Doa Restu", "Kupu-Kupu & Garuda"],
+    description: "Motif berornamen singgasana, pohon hayat, meru, dan kupu-kupu yang diukir dengan detail canting halus berwarna sogan pekat.",
+    philosophy: "'Sido' berarti menjadi terus-menerus dan 'Mukti' berarti hidup makmur mulia bahagia. Merupakan doa restu agar pemakainya memperoleh kelancaran rezeki dan kebahagiaan lahir batin.",
+    usage: "Busana pengantin adat Jawa pada malam midodareni dan ijab kabul.",
+    dominantColor: "Cokelat Keemasan (Sogan Klasik)",
+    featured: true
+  },
+  {
+    id: 7,
+    name: "Batik Tujuh Rupa Pekalongan",
+    origin: "Pekalongan, Jawa Tengah",
+    region: "Jawa Tengah",
+    category: "Keceriaan & Kemakmuran",
+    technique: "Batik Cap & Tulis Pesisiran",
+    era: "Abad ke-19 (Pesisir Jawa)",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Batik_Pekalongan_1900.jpg/800px-Batik_Pekalongan_1900.jpg",
+    tags: ["Pesisir", "Tujuh Tumbuhan", "Warna Cerah", "Flora Fauna"],
+    description: "Batik pesisir dengan ciri khas visual cerah ceria, memadukan 7 unsur motif alam (hewan, bunga, dedaunan, burung merak) dengan detail dinamis.",
+    philosophy: "Melambangkan keterbukaan masyarakat pesisir terhadap perbedaan, akulturasi budaya yang harmonis, serta sukacita dan semangat berwirausaha.",
+    usage: "Busana harian, sarung encim, acara pesta semi-formal hingga modern.",
+    dominantColor: "Merah Cerah, Hijau Pupus, Kuning & Merah Muda",
+    featured: false
+  },
+  {
+    id: 8,
+    name: "Batik Gentongan Madura",
+    origin: "Bangkalan & Tanjungbumi, Madura",
+    region: "Jawa Timur",
+    category: "Keteguhan & Keberanian",
+    technique: "Batik Tulis Rendam Gentong 6 Bulan",
+    era: "Abad ke-17",
+    image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=1000&auto=format&fit=crop",
+    tags: ["Madura", "Gentong Tanah", "Warna Pekat Berani", "Pesisir Timur"],
+    description: "Dinamakan gentongan karena kain direndam dalam gentong tanah liat selama berbulan-bulan untuk menghasilkan warna yang sangat awet dan tahan puluhan tahun.",
+    philosophy: "Warna merah cabai dan biru elektrik yang mencolok melambangkan ketegasan, keberanian, dan kejujuran karakter masyarakat Madura yang gigih bekerja keras.",
+    usage: "Busana adat Madura, busana pesta istimewa, dan koleksi pusaka keluarga.",
+    dominantColor: "Merah Menyala, Kuning Tua & Biru Pekat",
+    featured: false
+  },
+  {
+    id: 9,
+    name: "Batik Shaho Dayak",
+    origin: "Balikpapan & Kutai, Kalimantan Timur",
+    region: "Luar Jawa",
+    category: "Harmoni Alam & Warisan Etnik",
+    technique: "Batik Tulis Canting Modern",
+    era: "Abad ke-20",
+    image: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=1000&auto=format&fit=crop",
+    tags: ["Dayak", "Ukiran Belian", "Kalimantan", "Pohon Batang Garing"],
+    description: "Mengadaptasi ukiran etnik Dayak Bahau dan Kenyah, menggambarkan sulur melingkar, burung enggang, dan tameng pelindung diri.",
+    philosophy: "Melambangkan keselarasan mendalam antara manusia dengan hutan belantara Kalimantan, serta perlindungan spiritual dari leluhur.",
+    usage: "Pesta adat pedalaman, festival kebudayaan, dan seragam resmi daerah.",
+    dominantColor: "Hitam, Kuning Emas & Merah Tua",
+    featured: false
+  },
+  {
+    id: 10,
+    name: "Batik Asmat & Cenderawasih Papua",
+    origin: "Jayapura & Merauke, Papua",
+    region: "Luar Jawa",
+    category: "Kekuatan & Keagungan",
+    technique: "Batik Printing & Cap Tulis",
+    era: "Era 1980-an (Inisiatif Pemberdayaan Seniman Lokal)",
+    image: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?q=80&w=1000&auto=format&fit=crop",
+    tags: ["Burung Surga", "Ukiran Kayu Asmat", "Papua", "Etnik Eksotis"],
+    description: "Menampilkan siluet anggun Burung Cenderawasih bertengger di atas ukiran patung tifa dan motif perisai suku Asmat yang geometris tegas.",
+    philosophy: "Burung Cenderawasih sebagai burung surga melambangkan keagungan dan keindahan Tanah Papua, sedangkan perisai Asmat bermakna keteguhan menjaga kehormatan adat.",
+    usage: "Upacara penyambutan tamu kenegaraan dan festival budaya timur.",
+    dominantColor: "Terracotta, Cokelat Kayu, Emas & Hitam",
+    featured: true
+  },
+  {
+    id: 11,
+    name: "Batik Tambal",
+    origin: "Yogyakarta",
+    region: "DI Yogyakarta",
+    category: "Kesembuhan & Pemulihan",
+    technique: "Batik Tulis Halus",
+    era: "Abad ke-14 (Keraton Yogyakarta)",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/COLLECTIE_TROPENMUSEUM_Kain_pandjang_met_een_patroon_van_bloemen_in_ruiten_TMnr_4162-8.jpg/800px-COLLECTIE_TROPENMUSEUM_Kain_pandjang_met_een_patroon_van_bloemen_in_ruiten_TMnr_4162-8.jpg",
+    tags: ["Tambal Kain", "Penyembuhan", "Keraton", "Segitiga Geometris"],
+    description: "Motif tersusun dari jajaran segitiga geometris beraneka ragam motif kecil yang disusun berdampingan menyerupai tambalan kain perca.",
+    philosophy: "Dipercaya memiliki daya magis menyembuhkan orang sakit dengan harapan hal-hal yang kurang atau rusak dalam diri manusia dapat 'ditambal' dan kembali utuh.",
+    usage: "Selimut ritual penyembuhan orang sakit pada zaman dahulu, kini busana adat.",
+    dominantColor: "Cokelat Sogan, Hitam & Putih Gading",
+    featured: false
+  },
+  {
+    id: 12,
+    name: "Batik Priyangan Tasikmalaya",
+    origin: "Tasikmalaya, Jawa Barat",
+    region: "Jawa Barat",
+    category: "Kesederhanaan & Keanggunan",
+    technique: "Batik Tulis & Cap Sunda",
+    era: "Abad ke-19",
+    image: "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=1000&auto=format&fit=crop",
+    tags: ["Sunda Priangan", "Bunga Rumput", "Tenang", "Khas Tanah Pasundan"],
+    description: "Ciri khas ornamen tumbuhan kecil, rerumputan, dan bunga melati yang digambar ramping, renggang, dan anggun tanpa ornamen berlebih.",
+    philosophy: "Mencerminkan karakter orang Sunda yang ramah tamah (someah hade ka semah), lemah lembut, dan menghargai kesederhanaan hidup alami.",
+    usage: "Kebaya encim Sunda, busana wisuda, dan busana santai elegan.",
+    dominantColor: "Biru Muda Pastel, Hijau Sage & Krem Lembut",
+    featured: false
+  }
+];
+
+export const regions = [
+  "Semua Wilayah",
+  "DI Yogyakarta",
+  "Jawa Tengah",
+  "Jawa Barat",
+  "Jawa Timur",
+  "Luar Jawa"
+];
+
+export const categories = [
+  "Semua Kategori",
+  "Keberanian & Kepemimpinan",
+  "Spiritual & Ketenangan",
+  "Cinta & Kesetiaan",
+  "Kesucian & Keadilan",
+  "Kemakmuran & Masa Depan",
+  "Harmoni Alam & Warisan Etnik"
+];
+
+export const quizQuestions = [
+  {
+    id: 1,
+    question: "Motif batik khas Cirebon yang memiliki bentuk awan bergradasi adalah...",
+    options: ["Batik Parang", "Batik Mega Mendung", "Batik Kawung", "Batik Truntum"],
+    correctAnswer: 1,
+    explanation: "Batik Mega Mendung adalah mahakarya khas Cirebon dengan motif awan bergulung yang melambangkan kesabaran dan ketenangan jiwa."
+  },
+  {
+    id: 2,
+    question: "Motif batik yang sering dikenakan oleh orang tua mempelai pengantin Jawa karena melambangkan cinta yang bersemi kembali adalah...",
+    options: ["Batik Truntum", "Batik Parang Rusak", "Batik Tambal", "Batik Tujuh Rupa"],
+    correctAnswer: 0,
+    explanation: "Batik Truntum diciptakan oleh Kanjeng Ratu Kencana dan berasal dari kata 'tumaruntum' yang bermakna cinta yang tumbuh dan bersemi kembali."
+  },
+  {
+    id: 3,
+    question: "Batik Kawung memiliki pola empat lingkaran oval yang terinspirasi dari bentuk...",
+    options: ["Bunga Teratai", "Buah Kolang-Kaling (Aren)", "Matahari Terbit", "Sayap Kupu-kupu"],
+    correctAnswer: 1,
+    explanation: "Motif Kawung terinspirasi dari penampang buah aren atau kolang-kaling yang melambangkan kesucian hati dan prinsip empat penjuru."
+  },
+  {
+    id: 4,
+    question: "Kota di Jawa Tengah yang terkenal dengan julukan 'Kota Batik' dengan ciri khas motif pesisir warna-warni yang kaya adalah...",
+    options: ["Semarang", "Pekalongan", "Magelang", "Salatiga"],
+    correctAnswer: 1,
+    explanation: "Pekalongan dikenal sebagai Kota Batik dunia dengan gaya batik pesisiran yang dinamis, kaya warna, dan terbuka terhadap pengaruh budaya luar."
+  },
+  {
+    id: 5,
+    question: "Motif batik tertua di tanah Jawa yang menggambarkan deburan ombak laut selatan menghantam karang adalah...",
+    options: ["Batik Sekar Jagad", "Batik Parang Rusak", "Batik Sidomukti", "Batik Asmat"],
+    correctAnswer: 1,
+    explanation: "Batik Parang diciptakan sejak zaman Kerajaan Mataram Islam, terinspirasi oleh ombak laut selatan yang pantang menyerah."
+  }
+];
