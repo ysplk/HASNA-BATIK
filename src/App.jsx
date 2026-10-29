@@ -1,251 +1,287 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import FilterSection from './components/FilterSection';
+import React, { useState, useEffect, useMemo } from 'react';
+import Sidebar from './components/Sidebar';
+import TopHeader from './components/TopHeader';
+import HeroSection from './components/HeroSection';
 import BatikCard from './components/BatikCard';
-import BatikDetailModal from './components/BatikDetailModal';
-import AddBatikModal from './components/AddBatikModal';
-import QuizModal from './components/QuizModal';
-import PhilosophySection from './components/PhilosophySection';
-import Footer from './components/Footer';
+import DetailView from './components/DetailView';
+import CartView from './components/CartView';
+import CrudModal from './components/CrudModal';
 import { initialBatikList } from './data/batikData';
-import { Sparkles, Heart, Search, Frown } from 'lucide-react';
 
 export default function App() {
-  // 1. Data Batik State with LocalStorage persistence
+  // 1. Batik Catalog State with LocalStorage
   const [batikList, setBatikList] = useState(() => {
     try {
-      const saved = localStorage.getItem('batikpedia_list');
+      const saved = localStorage.getItem('lumina_batik_list');
       return saved ? JSON.parse(saved) : initialBatikList;
     } catch {
       return initialBatikList;
     }
   });
 
-  // 2. Favorites State with LocalStorage persistence
-  const [favorites, setFavorites] = useState(() => {
+  // 2. Shopping Cart State with LocalStorage
+  const [cart, setCart] = useState(() => {
     try {
-      const saved = localStorage.getItem('batikpedia_favorites');
-      return saved ? JSON.parse(saved) : [1, 2, 4]; // Default favorite initial Mega Mendung, Parang, Truntum
+      const saved = localStorage.getItem('lumina_cart');
+      return saved ? JSON.parse(saved) : [];
     } catch {
-      return [1, 2, 4];
+      return [];
     }
   });
 
-  // 3. Filter and Search States
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedRegion, setSelectedRegion] = useState('Semua Wilayah');
-  const [selectedCategory, setSelectedCategory] = useState('Semua Kategori');
-  const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
-
-  // 4. Modal States
+  // 3. Navigation & Views State
+  const [currentView, setCurrentView] = useState('catalog'); // 'catalog' | 'detail' | 'cart'
   const [selectedBatik, setSelectedBatik] = useState(null);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [isQuizModalOpen, setIsQuizModalOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('Semua');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const galleryRef = useRef(null);
+  // 4. CRUD Modal State
+  const [isCrudModalOpen, setIsCrudModalOpen] = useState(false);
+  const [editingBatik, setEditingBatik] = useState(null);
 
-  // Sync with LocalStorage
+  // Save to LocalStorage on changes
   useEffect(() => {
     try {
-      localStorage.setItem('batikpedia_list', JSON.stringify(batikList));
+      localStorage.setItem('lumina_batik_list', JSON.stringify(batikList));
     } catch (err) {
-      console.error("Gagal menyimpan ke localStorage", err);
+      console.error("Gagal menyimpan katalog ke localStorage", err);
     }
   }, [batikList]);
 
   useEffect(() => {
     try {
-      localStorage.setItem('batikpedia_favorites', JSON.stringify(favorites));
+      localStorage.setItem('lumina_cart', JSON.stringify(cart));
     } catch (err) {
-      console.error("Gagal menyimpan favorit ke localStorage", err);
+      console.error("Gagal menyimpan keranjang ke localStorage", err);
     }
-  }, [favorites]);
+  }, [cart]);
 
-  // Toggle Favorite Handler
-  const toggleFavorite = (id) => {
-    setFavorites(prev => {
-      if (prev.includes(id)) {
-        return prev.filter(item => item !== id);
-      } else {
-        return [...prev, id];
+  // Cart Operations
+  const handleAddToCart = (batik) => {
+    setCart(prev => {
+      const existing = prev.find(item => item.id === batik.id);
+      if (existing) {
+        return prev.map(item => 
+          item.id === batik.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
       }
+      return [...prev, { ...batik, quantity: 1 }];
     });
   };
 
-  // Add new Batik handler
-  const handleAddBatik = (newBatik) => {
-    setBatikList(prev => [newBatik, ...prev]);
-    // Automatically open the newly added batik's detail
-    setSelectedBatik(newBatik);
+  const handleUpdateQuantity = (id, quantity) => {
+    if (quantity <= 0) {
+      handleRemoveFromCart(id);
+      return;
+    }
+    setCart(prev => prev.map(item => item.id === id ? { ...item, quantity } : item));
   };
 
-  // Reset Filters
-  const handleResetFilters = () => {
+  const handleRemoveFromCart = (id) => {
+    setCart(prev => prev.filter(item => item.id !== id));
+  };
+
+  const handleClearCart = () => {
+    setCart([]);
+  };
+
+  const totalCartCount = useMemo(() => {
+    return cart.reduce((acc, item) => acc + item.quantity, 0);
+  }, [cart]);
+
+  // CRUD Operations: Create & Update
+  const handleOpenAddModal = () => {
+    setEditingBatik(null);
+    setIsCrudModalOpen(true);
+  };
+
+  const handleOpenEditModal = (batik) => {
+    setEditingBatik(batik);
+    setIsCrudModalOpen(true);
+  };
+
+  const handleSaveBatik = (savedItem) => {
+    if (editingBatik) {
+      // Update existing
+      setBatikList(prev => prev.map(item => item.id === savedItem.id ? savedItem : item));
+      if (selectedBatik && selectedBatik.id === savedItem.id) {
+        setSelectedBatik(savedItem);
+      }
+    } else {
+      // Create new
+      setBatikList(prev => [savedItem, ...prev]);
+    }
+    setIsCrudModalOpen(false);
+    setEditingBatik(null);
+  };
+
+  // CRUD Operation: Delete
+  const handleDeleteBatik = (id) => {
+    const itemToDelete = batikList.find(b => b.id === id);
+    const confirmDelete = window.confirm(`Apakah Anda yakin ingin menghapus "${itemToDelete?.name || 'motif ini'}" dari katalog?`);
+    if (confirmDelete) {
+      setBatikList(prev => prev.filter(item => item.id !== id));
+      // If we are currently viewing this item in detail view, return to catalog
+      if (selectedBatik && selectedBatik.id === id) {
+        setSelectedBatik(null);
+        setCurrentView('catalog');
+      }
+    }
+  };
+
+  // View navigation handlers
+  const handleSelectBatik = (batik) => {
+    setSelectedBatik(batik);
+    setCurrentView('detail');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleBackToCatalog = () => {
+    setCurrentView('catalog');
+    setSelectedBatik(null);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleOpenCart = () => {
+    setCurrentView('cart');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleResetView = () => {
+    setSelectedCategory('Semua');
     setSearchQuery('');
-    setSelectedRegion('Semua Wilayah');
-    setSelectedCategory('Semua Kategori');
-    setShowOnlyFavorites(false);
+    setCurrentView('catalog');
+    setSelectedBatik(null);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Filtered List calculation
-  const filteredBatik = useMemo(() => {
+  // Filter calculation
+  const filteredBatikList = useMemo(() => {
     return batikList.filter((item) => {
-      // 1. Filter Region
-      if (selectedRegion !== 'Semua Wilayah' && item.region !== selectedRegion) {
+      // Category filter
+      if (selectedCategory !== 'Semua' && item.category !== selectedCategory) {
         return false;
       }
-
-      // 2. Filter Category
-      if (selectedCategory !== 'Semua Kategori' && item.category !== selectedCategory) {
-        return false;
-      }
-
-      // 3. Filter Favorites
-      if (showOnlyFavorites && !favorites.includes(item.id)) {
-        return false;
-      }
-
-      // 4. Filter Search Query
+      // Search query filter
       if (searchQuery.trim() !== '') {
         const query = searchQuery.toLowerCase();
         const matchName = item.name.toLowerCase().includes(query);
-        const matchOrigin = item.origin.toLowerCase().includes(query);
+        const matchRegion = item.region?.toLowerCase().includes(query);
         const matchPhilosophy = item.philosophy?.toLowerCase().includes(query);
-        const matchTags = item.tags?.some(tag => tag.toLowerCase().includes(query));
-        return matchName || matchOrigin || matchPhilosophy || matchTags;
+        const matchDescription = item.description?.toLowerCase().includes(query);
+        return matchName || matchRegion || matchPhilosophy || matchDescription;
       }
-
       return true;
     });
-  }, [batikList, selectedRegion, selectedCategory, showOnlyFavorites, searchQuery, favorites]);
-
-  // Scroll to gallery
-  const scrollToGallery = () => {
-    galleryRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, [batikList, selectedCategory, searchQuery]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FDFBF7] selection:bg-[#C5A059] selection:text-[#2A1810]">
+    <div className="min-h-screen bg-[#FAF8F5] text-stone-800 flex">
       
-      {/* Navigation Bar */}
-      <Navbar
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        favoritesCount={favorites.length}
-        onOpenFavorites={() => {
-          setShowOnlyFavorites(true);
-          scrollToGallery();
+      {/* 1. Left Sidebar Navigation (Matches Lumina Layout) */}
+      <Sidebar
+        selectedCategory={selectedCategory}
+        onSelectCategory={(cat) => {
+          setSelectedCategory(cat);
+          setCurrentView('catalog');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
-        onOpenAddModal={() => setIsAddModalOpen(true)}
-        onOpenQuiz={() => setIsQuizModalOpen(true)}
+        onResetView={handleResetView}
+        isOpenMobile={isMobileMenuOpen}
+        onCloseMobile={() => setIsMobileMenuOpen(false)}
       />
 
-      {/* Hero Header */}
-      <Hero 
-        totalBatik={batikList.length}
-        onExploreClick={scrollToGallery}
-      />
-
-      {/* Main Content Area */}
-      <main className="flex-1" ref={galleryRef}>
+      {/* 2. Main Content Area */}
+      <div className="flex-1 flex flex-col min-w-0 min-h-screen">
         
-        {/* Filters & Categories */}
-        <FilterSection
-          selectedRegion={selectedRegion}
-          setSelectedRegion={setSelectedRegion}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          showOnlyFavorites={showOnlyFavorites}
-          setShowOnlyFavorites={setShowOnlyFavorites}
-          searchQuery={searchQuery}
-          onResetFilters={handleResetFilters}
-          totalResults={filteredBatik.length}
+        {/* Top Header Bar */}
+        <TopHeader
+          cartCount={totalCartCount}
+          onOpenCart={handleOpenCart}
+          onOpenAddModal={handleOpenAddModal}
+          onToggleMobileMenu={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         />
 
-        {/* Batik Grid Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        {/* Dynamic View Container */}
+        <main className="flex-1 px-4 sm:px-8 pb-16 max-w-7xl w-full mx-auto">
           
-          {/* Active Filter Notice */}
-          {showOnlyFavorites && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-2xl flex items-center justify-between text-red-800 text-sm">
-              <div className="flex items-center gap-2">
-                <Heart className="w-5 h-5 text-red-600 fill-red-600" />
-                <span>Menampilkan <strong>{filteredBatik.length}</strong> motif yang tersimpan di koleksi favoritmu.</span>
-              </div>
-              <button 
-                onClick={() => setShowOnlyFavorites(false)}
-                className="text-xs font-bold underline hover:text-red-950"
-              >
-                Tampilkan Semua
-              </button>
+          {/* VIEW: CATALOG */}
+          {currentView === 'catalog' && (
+            <div className="space-y-6 animate-fadeIn">
+              {/* Hero Banner */}
+              <HeroSection
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+              />
+
+              {/* Product Grid */}
+              {filteredBatikList.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+                  {filteredBatikList.map((batik) => (
+                    <BatikCard
+                      key={batik.id}
+                      batik={batik}
+                      onSelect={handleSelectBatik}
+                      onEdit={handleOpenEditModal}
+                      onDelete={handleDeleteBatik}
+                    />
+                  ))}
+                </div>
+              ) : (
+                /* Empty state when search or filter returns 0 */
+                <div className="bg-white border border-[#EFECE6] rounded-3xl p-12 text-center space-y-3">
+                  <h3 className="font-serif text-lg font-bold text-stone-800">
+                    Tidak Ada Motif Ditemukan
+                  </h3>
+                  <p className="text-xs text-stone-500 max-w-md mx-auto">
+                    Koleksi dengan kategori "{selectedCategory}" {searchQuery && `dan kata kunci "${searchQuery}"`} belum tersedia.
+                  </p>
+                  <button
+                    onClick={handleResetView}
+                    className="px-5 py-2.5 rounded-xl bg-[#261E1A] text-white text-xs font-semibold hover:bg-[#1A1411] transition-all"
+                  >
+                    Tampilkan Semua Motif
+                  </button>
+                </div>
+              )}
             </div>
           )}
 
-          {/* Cards Grid */}
-          {filteredBatik.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-7">
-              {filteredBatik.map((batik) => (
-                <BatikCard
-                  key={batik.id}
-                  batik={batik}
-                  isFavorite={favorites.includes(batik.id)}
-                  onToggleFavorite={toggleFavorite}
-                  onSelect={setSelectedBatik}
-                />
-              ))}
-            </div>
-          ) : (
-            /* Empty State */
-            <div className="text-center py-20 bg-stone-50 rounded-3xl border border-dashed border-stone-300 max-w-lg mx-auto space-y-4">
-              <div className="w-16 h-16 mx-auto rounded-full bg-stone-200 flex items-center justify-center text-stone-500">
-                <Frown className="w-8 h-8" />
-              </div>
-              <div className="space-y-1">
-                <h3 className="font-serif-title text-xl font-bold text-stone-800">
-                  Tidak Ada Motif Ditemukan
-                </h3>
-                <p className="text-xs sm:text-sm text-stone-500 max-w-xs mx-auto">
-                  Coba ubah kata kunci pencarian atau sesuaikan pilihan filter daerah dan kategori.
-                </p>
-              </div>
-              <button
-                onClick={handleResetFilters}
-                className="px-5 py-2 rounded-xl bg-[#8B4513] text-white text-xs font-semibold hover:bg-[#6b350e] transition-colors"
-              >
-                Reset Semua Filter
-              </button>
-            </div>
+          {/* VIEW: DETAIL (Image 5) */}
+          {currentView === 'detail' && selectedBatik && (
+            <DetailView
+              batik={selectedBatik}
+              onBack={handleBackToCatalog}
+              onAddToCart={handleAddToCart}
+              onEdit={handleOpenEditModal}
+              onDelete={handleDeleteBatik}
+            />
           )}
 
-        </div>
+          {/* VIEW: CART (Image 4) */}
+          {currentView === 'cart' && (
+            <CartView
+              cartItems={cart}
+              onBack={handleBackToCatalog}
+              onUpdateQuantity={handleUpdateQuantity}
+              onRemoveItem={handleRemoveFromCart}
+              onClearCart={handleClearCart}
+            />
+          )}
 
-        {/* Culture & Philosophy Education Section */}
-        <PhilosophySection />
+        </main>
+      </div>
 
-      </main>
-
-      {/* Footer */}
-      <Footer />
-
-      {/* Modals */}
-      <BatikDetailModal
-        batik={selectedBatik}
-        isOpen={Boolean(selectedBatik)}
-        onClose={() => setSelectedBatik(null)}
-        isFavorite={selectedBatik ? favorites.includes(selectedBatik.id) : false}
-        onToggleFavorite={toggleFavorite}
-      />
-
-      <AddBatikModal
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        onAddBatik={handleAddBatik}
-      />
-
-      <QuizModal
-        isOpen={isQuizModalOpen}
-        onClose={() => setIsQuizModalOpen(false)}
+      {/* CRUD Modal (Create & Update) */}
+      <CrudModal
+        isOpen={isCrudModalOpen}
+        onClose={() => {
+          setIsCrudModalOpen(false);
+          setEditingBatik(null);
+        }}
+        onSave={handleSaveBatik}
+        initialData={editingBatik}
       />
 
     </div>

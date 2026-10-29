@@ -6,14 +6,21 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+      },
       colors: {
-        batik: {
-          dark: '#2A1810',
-          brown: '#4A2511',
+        lumina: {
+          bg: '#FAF8F5',
+          card: '#FFFFFF',
+          hero: '#F4ECE1',
+          active: '#F4EDE4',
+          border: '#EFECE6',
+          accent: '#8C6D46',
           gold: '#C5A059',
-          amber: '#8B4513',
-          cream: '#FDFBF7',
-          sand: '#F4ECE1',
+          dark: '#1F1A17',
+          dot: '#6B4B3E',
         }
       }
     },
