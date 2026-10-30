@@ -76,9 +76,9 @@ export default function Sidebar({
 
         {/* Bottom Badge */}
         <div className="pt-6">
-          <div className="bg-[#FAF6F0] border border-[#EFE8DF] rounded-xl p-3.5 text-xs text-stone-600 leading-relaxed font-normal">
+          {/* <div className="bg-[#FAF6F0] border border-[#EFE8DF] rounded-xl p-3.5 text-xs text-stone-600 leading-relaxed font-normal">
             Dibuat dengan rasa cinta pada Budaya Indonesia.
-          </div>
+          </div> */}
         </div>
       </aside>
     </>
